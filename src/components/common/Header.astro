@@ -1,0 +1,39 @@
+---
+import { getTranslations, languages, type Lang } from '../../i18n/ui';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const basePath = `/${lang}`;
+---
+
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-surface-950/80 backdrop-blur-md border-b border-surface-200 dark:border-surface-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href={basePath} class="flex items-center gap-2 text-surface-900 dark:text-surface-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <span class="text-2xl">⚔️</span>
+        <span class="text-xl font-bold">Crimson Guide</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href={`${basePath}/guides`} class="text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t['nav.guides']}</a>
+        <a href={`${basePath}/map`} class="text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t['nav.map']}</a>
+        <a href={`${basePath}/news`} class="text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t['nav.news']}</a>
+        <a href={`${basePath}/about`} class="text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t['nav.about']}</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3">
+        <LanguageSwitcher lang={lang} />
+        <ThemeToggle client:load />
+      </div>
+    </div>
+  </div>
+</header>

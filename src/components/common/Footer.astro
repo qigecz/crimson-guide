@@ -1,0 +1,55 @@
+---
+import { getTranslations, type Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<footer class="bg-surface-50 dark:bg-surface-900 border-t border-surface-200 dark:border-surface-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">⚔️</span>
+          <span class="text-xl font-bold text-surface-900 dark:text-surface-100">Crimson Guide</span>
+        </div>
+        <p class="text-sm text-surface-500 dark:text-surface-400">{t['footer.disclaimer']}</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-4">{t['nav.guides']}</h3>
+        <ul class="space-y-2">
+          <li><a href={`/${lang}/guides/story`} class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">{t['category.story']}</a></li>
+          <li><a href={`/${lang}/guides/equipment`} class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">{t['category.equipment']}</a></li>
+          <li><a href={`/${lang}/guides/bosses`} class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">{t['category.bosses']}</a></li>
+          <li><a href={`/${lang}/guides/beginners`} class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">{t['category.beginners']}</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-4">Resources</h3>
+        <ul class="space-y-2">
+          <li><a href={`/${lang}/map`} class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">{t['nav.map']}</a></li>
+          <li>
+            <a href="https://crimsondesert.pearlabyss.com" target="_blank" rel="noopener noreferrer" class="text-sm text-surface-500 dark:text-surface-400 hover:text-primary-600">
+              Official Site ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-surface-200 dark:border-surface-800 text-center">
+      <p class="text-xs text-surface-400 dark:text-surface-500">
+        © 2026 Crimson Guide. {t['footer.rights']}
+      </p>
+    </div>
+  </div>
+</footer>

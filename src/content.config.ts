@@ -1,4 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 const categories = [
   'story',
@@ -14,7 +16,7 @@ const categories = [
 export type Category = (typeof categories)[number];
 
 const guides = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/guides/**/*.{md,mdx}', base: './src/content' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
