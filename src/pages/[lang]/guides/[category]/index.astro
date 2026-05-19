@@ -7,7 +7,7 @@ import { getTranslations, type Lang } from '../../../../i18n/ui';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const langs: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
-  const categories = ['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners', 'news'] as const;
+  const categories = ['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners'] as const;
   const paths = [];
   for (const lang of langs) {
     for (const category of categories) {
@@ -20,12 +20,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { lang, category } = Astro.params as { lang: Lang; category: string };
 const t = getTranslations(lang);
 
-const allCategoryKeys = ['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners', 'news'] as const;
+const allCategoryKeys = ['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners'] as const;
 
-// Get guides for this language and category
 const allGuides = await getCollection('guides');
 const filteredGuides = allGuides
-  .filter((entry) => entry.id.startsWith(`${lang}/`) && entry.data.category === category)
+  .filter((entry) => entry.id.startsWith(`${lang}/guides/`) && entry.data.category === category)
   .sort((a, b) => {
     const orderDiff = (a.data.order || 0) - (b.data.order || 0);
     if (orderDiff !== 0) return orderDiff;
@@ -37,7 +36,6 @@ const filteredGuides = allGuides
 
 <BaseLayout title={`${t[`category.${category}`] || category} - ${t['nav.guides']}`} description={t['hero.subtitle']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Page Header -->
     <div class="mb-8">
       <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
         {t[`category.${category}`] || category}
@@ -47,59 +45,29 @@ const filteredGuides = allGuides
       </p>
     </div>
 
-    <!-- Category Tabs -->
     <div class="flex flex-wrap gap-2 mb-8">
-      <a
-        href={`/${lang}/guides`}
-        class="px-4 py-2 text-sm font-medium rounded-lg bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors"
-      >
+      <a href={`/${lang}/guides`} class="px-4 py-2 text-sm font-medium rounded-lg bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors">
         {t['hero.cta.guides']}
       </a>
-      {allCategoryKeys.map((cat) => {
-        const isActive = cat === category;
-        return (
-          <a
-            href={`/${lang}/guides/${cat}`}
-            class:list={[
-              'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
-              isActive
-                ? 'bg-primary-600 text-white'
-                : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700',
-            ]}
-          >
-            {t[`category.${cat}`]}
-          </a>
-        );
-      })}
+      {allCategoryKeys.map((cat) => (
+        <a href={`/${lang}/guides/${cat}`} class:list={['px-4 py-2 text-sm font-medium rounded-lg transition-colors', cat === category ? 'bg-primary-600 text-white' : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700']}>
+          {t[`category.${cat}`]}
+        </a>
+      ))}
     </div>
 
-    <!-- Guides Grid -->
     {filteredGuides.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredGuides.map((guide) => {
-          const slug = guide.id
-            .replace(new RegExp(`^${lang}/guides/`), '')
-            .replace(/\.(md|mdx)$/, '');
+          const slug = guide.id.replace(new RegExp(`^${lang}/guides/`), '').replace(/\.(md|mdx)$/, '');
           return (
-            <GuideCard
-              title={guide.data.title}
-              description={guide.data.description}
-              category={guide.data.category}
-              tags={guide.data.tags}
-              difficulty={guide.data.difficulty}
-              publishDate={guide.data.publishDate}
-              coverImage={guide.data.coverImage}
-              slug={slug}
-              lang={lang}
-            />
+            <GuideCard title={guide.data.title} description={guide.data.description} category={guide.data.category} tags={guide.data.tags} difficulty={guide.data.difficulty} publishDate={guide.data.publishDate} coverImage={guide.data.coverImage} slug={slug} lang={lang} />
           );
         })}
       </div>
     ) : (
       <div class="text-center py-16">
-        <p class="text-surface-500 dark:text-surface-400 text-lg">
-          No guides available in this category yet.
-        </p>
+        <p class="text-surface-500 dark:text-surface-400 text-lg">No guides available in this category yet.</p>
       </div>
     )}
   </div>

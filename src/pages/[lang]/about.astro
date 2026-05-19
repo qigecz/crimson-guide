@@ -1,0 +1,133 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTranslations, type Lang } from '../../i18n/ui';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const langs: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
+  return langs.map((lang) => ({ params: { lang } }));
+};
+
+const { lang } = Astro.params as { lang: Lang };
+const t = getTranslations(lang);
+
+const aboutContent: Record<Lang, { title: string; sections: { heading: string; body: string }[] }> = {
+  en: {
+    title: 'About Crimson Guide',
+    sections: [
+      {
+        heading: 'Our Mission',
+        body: 'Crimson Guide is a fan-made resource dedicated to helping players navigate the world of Crimson Desert. Our goal is to provide comprehensive, accurate, and up-to-date guides for players around the world.',
+      },
+      {
+        heading: 'Disclaimer',
+        body: 'This website is not affiliated with, endorsed by, or connected to Pearl Abyss. Crimson Desert is a trademark of Pearl Abyss. All game assets, logos, and names are property of their respective owners.',
+      },
+      {
+        heading: 'Contributing',
+        body: 'We welcome contributions from the community! If you\'d like to help improve our guides, fix errors, or add new content, feel free to reach out. Together we can build the best Crimson Desert resource.',
+      },
+      {
+        heading: 'Contact',
+        body: 'Have questions or suggestions? Reach out to us on our social media channels or open an issue on our GitHub repository.',
+      },
+    ],
+  },
+  'zh-cn': {
+    title: '关于 Crimson Guide',
+    sections: [
+      {
+        heading: '我们的使命',
+        body: 'Crimson Guide 是一个玩家自制资源站，致力于帮助玩家探索《红色沙漠》的世界。我们的目标是为全球玩家提供全面、准确、及时的攻略内容。',
+      },
+      {
+        heading: '免责声明',
+        body: '本站与 Pearl Abyss 无任何关联、不代表、也不连接 Pearl Abyss。《红色沙漠》是 Pearl Abyss 的商标。所有游戏素材、标识和名称均为其各自所有者的财产。',
+      },
+      {
+        heading: '参与贡献',
+        body: '我们欢迎社区贡献！如果您想帮助改进攻略、修复错误或添加新内容，欢迎联系我们。让我们一起打造最好的《红色沙漠》攻略资源。',
+      },
+      {
+        heading: '联系方式',
+        body: '有任何问题或建议？请在社交媒体上联系我们，或在我们 GitHub 仓库中提交 Issue。',
+      },
+    ],
+  },
+  ja: {
+    title: 'Crimson Guide について',
+    sections: [
+      { heading: '私たちの使命', body: 'Crimson Guide は、Crimson Desert の世界をナビゲートするプレイヤーを支援するために作られたファンサイトです。世界中のプレイヤーに包括的で正確なガイドを提供することを目指しています。' },
+      { heading: '免責事項', body: 'このウェブサイトは Pearl Abyss と提携、推奨、または接続されていません。Crimson Desert は Pearl Abyss の商標です。' },
+      { heading: '貢献', body: 'コミュニティからの貢献を歓迎します！ガイドの改善にご協力ください。' },
+      { heading: 'お問い合わせ', body: 'ご質問やご提案がありましたら、ソーシャルメディアにてお問い合わせください。' },
+    ],
+  },
+  ko: {
+    title: 'Crimson Guide 소개',
+    sections: [
+      { heading: '우리의 사명', body: 'Crimson Guide는 Crimson Desert 세계를 탐험하는 플레이어를 돕기 위해 만든 팬 사이트입니다.' },
+      { heading: '면책 조항', body: '이 웹사이트는 Pearl Abyss와 제휴, 보증 또는 연결되어 있지 않습니다.' },
+      { heading: '기여', body: '커뮤니티의 기여를 환영합니다! 가이드 개선에 도움을 주세요.' },
+      { heading: '연락처', body: '질문이나 제안이 있으시면 소셜 미디어로 연락해 주세요.' },
+    ],
+  },
+  es: {
+    title: 'Sobre Crimson Guide',
+    sections: [
+      { heading: 'Nuestra Misión', body: 'Crimson Guide es un recurso hecho por fans dedicado a ayudar a los jugadores a navegar el mundo de Crimson Desert.' },
+      { heading: 'Aviso Legal', body: 'Este sitio web no está afiliado con Pearl Abyss. Crimson Desert es una marca registrada de Pearl Abyss.' },
+      { heading: 'Contribuir', body: '¡Agradecemos las contribuciones de la comunidad! Ayúdanos a mejorar las guías.' },
+      { heading: 'Contacto', body: '¿Tienes preguntas o sugerencias? Contáctanos en redes sociales.' },
+    ],
+  },
+  pt: {
+    title: 'Sobre o Crimson Guide',
+    sections: [
+      { heading: 'Nossa Missão', body: 'Crimson Guide é um recurso feito por fãs dedicado a ajudar jogadores a navegar pelo mundo de Crimson Desert.' },
+      { heading: 'Aviso Legal', body: 'Este site não é afiliado à Pearl Abyss. Crimson Desert é uma marca registrada da Pearl Abyss.' },
+      { heading: 'Contribuir', body: 'Agradecemos contribuições da comunidade! Ajude-nos a melhorar os guias.' },
+      { heading: 'Contato', body: 'Tem perguntas ou sugestões? Entre em contato pelas redes sociais.' },
+    ],
+  },
+};
+
+const content = aboutContent[lang] || aboutContent.en;
+---
+
+<BaseLayout title={t['nav.about']} description={content.title}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-8">
+      {content.title}
+    </h1>
+
+    <div class="space-y-8">
+      {content.sections.map((section) => (
+        <section class="bg-white dark:bg-surface-900 rounded-xl border border-surface-200 dark:border-surface-800 p-6">
+          <h2 class="text-xl font-bold text-surface-900 dark:text-surface-100 mb-3">
+            {section.heading}
+          </h2>
+          <p class="text-surface-600 dark:text-surface-400 leading-relaxed">
+            {section.body}
+          </p>
+        </section>
+      ))}
+    </div>
+
+    <!-- Links -->
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href={`/${lang}/guides`}
+        class="px-6 py-3 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors"
+      >
+        {t['hero.cta.guides']}
+      </a>
+      <a
+        href={`/${lang}/map`}
+        class="px-6 py-3 rounded-lg bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300 font-medium hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors"
+      >
+        {t['hero.cta.map']}
+      </a>
+    </div>
+  </div>
+</BaseLayout>

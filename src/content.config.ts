@@ -15,8 +15,10 @@ const categories = [
 
 export type Category = (typeof categories)[number];
 
+// Single "guides" collection that includes both guides and news
+// Pattern matches both guides/** and news/** subdirectories
 const guides = defineCollection({
-  loader: glob({ pattern: '**/guides/**/*.{md,mdx}', base: './src/content' }),
+  loader: glob({ pattern: '**/{guides,news}/**/*.{md,mdx}', base: './src/content' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

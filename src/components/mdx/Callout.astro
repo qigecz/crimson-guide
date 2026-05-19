@@ -1,0 +1,25 @@
+---
+interface Props {
+  type?: 'tip' | 'warning' | 'important' | 'info';
+}
+
+const { type = 'info' } = Astro.props;
+
+const config: Record<string, { icon: string; borderColor: string; bgColor: string; iconColor: string }> = {
+  tip: { icon: '💡', borderColor: 'border-green-400 dark:border-green-600', bgColor: 'bg-green-50 dark:bg-green-900/20', iconColor: 'text-green-600' },
+  warning: { icon: '⚠️', borderColor: 'border-yellow-400 dark:border-yellow-600', bgColor: 'bg-yellow-50 dark:bg-yellow-900/20', iconColor: 'text-yellow-600' },
+  important: { icon: '❗', borderColor: 'border-red-400 dark:border-red-600', bgColor: 'bg-red-50 dark:bg-red-900/20', iconColor: 'text-red-600' },
+  info: { icon: 'ℹ️', borderColor: 'border-blue-400 dark:border-blue-600', bgColor: 'bg-blue-50 dark:bg-blue-900/20', iconColor: 'text-blue-600' },
+};
+
+const { icon, borderColor, bgColor } = config[type];
+---
+
+<div class={`rounded-lg border-l-4 ${borderColor} ${bgColor} p-4 my-4`}>
+  <div class="flex items-start gap-3">
+    <span class="text-lg flex-shrink-0">{icon}</span>
+    <div class="flex-1">
+      <slot />
+    </div>
+  </div>
+</div>

@@ -9,13 +9,13 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  articleSchema?: object;
 }
 
-const { title, description, ogImage = '/og-default.jpg' } = Astro.props;
+const { title, description, ogImage = '/og-default.jpg', articleSchema } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 
-// Build hreflang alternates
 const locales: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
 const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
 ---
@@ -27,6 +27,10 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#dc2626" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -34,6 +38,11 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <!-- Canonical -->
     <link rel="canonical" href={Astro.url.href} />
@@ -44,6 +53,9 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
     ))}
     <link rel="alternate" hreflang="x-default" href={`/en${currentPath}`} />
 
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title={`Crimson Guide RSS (${lang})`} href={`/${lang}/rss.xml`} />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -52,7 +64,24 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
       rel="stylesheet"
     />
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <title>{title} | Crimson Guide</title>
+
+    <!-- JSON-LD Structured Data -->
+    {articleSchema ? (
+      <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    ) : (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Crimson Guide",
+        "url": "https://crimsonsguide.com",
+        "description": description,
+        "inLanguage": locales,
+      })} />
+    )}
   </head>
   <body class="min-h-screen flex flex-col bg-white text-surface-900 dark:bg-surface-950 dark:text-surface-100">
     <Header lang={lang} />

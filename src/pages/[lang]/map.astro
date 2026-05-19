@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InteractiveMap from '../../components/map/InteractiveMap.tsx';
+import { getTranslations, type Lang } from '../../i18n/ui';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const langs: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
+  return langs.map((lang) => ({ params: { lang } }));
+};
+
+const { lang } = Astro.params as { lang: Lang };
+const t = getTranslations(lang);
+---
+
+<BaseLayout title={t['nav.map']} description="Interactive map of the Crimson Desert world">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
+        {t['nav.map']}
+      </h1>
+      <p class="text-surface-600 dark:text-surface-400">
+        Explore the world of Crimson Desert. Click markers to find guides and points of interest.
+      </p>
+    </div>
+
+    <!-- Interactive Map -->
+    <InteractiveMap client:load lang={lang} />
+  </div>
+</BaseLayout>

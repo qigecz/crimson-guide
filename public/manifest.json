@@ -1,0 +1,21 @@
+{
+  "name": "Crimson Guide",
+  "short_name": "CrimsonGuide",
+  "description": "Your ultimate resource for everything Crimson Desert",
+  "start_url": "/en",
+  "display": "standalone",
+  "theme_color": "#dc2626",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "markers": [
+    {
+      "id": "boss-desert-guardian",
+      "name": "Desert Guardian",
+      "type": "boss",
+      "lat": 35.5,
+      "lng": 25.3,
+      "description": "World boss in the northern wasteland",
+      "guide": "bosses/desert-guardian"
+    },
+    {
+      "id": "boss-shadow-lord",
+      "name": "Shadow Lord",
+      "type": "boss",
+      "lat": 20.1,
+      "lng": 40.7,
+      "description": "End-game boss in the shadow realm",
+      "guide": "bosses/shadow-lord"
+    },
+    {
+      "id": "mount-wild-horse",
+      "name": "Wild Horse Herd",
+      "type": "mounts",
+      "lat": 30.2,
+      "lng": 15.8,
+      "description": "Wild horses can be tamed here",
+      "guide": "mounts/horse-taming"
+    },
+    {
+      "id": "teleport-central",
+      "name": "Central City Teleport",
+      "type": "teleports",
+      "lat": 28.0,
+      "lng": 28.0,
+      "description": "Main teleport hub connecting all regions",
+      "guide": ""
+    },
+    {
+      "id": "collectible-ancient-sword",
+      "name": "Ancient Sword Fragment",
+      "type": "collectibles",
+      "lat": 33.5,
+      "lng": 35.2,
+      "description": "Hidden collectible behind the waterfall",
+      "guide": "exploration/collectibles"
+    },
+    {
+      "id": "quest-main-01",
+      "name": "Main Quest: The Journey Begins",
+      "type": "quests",
+      "lat": 28.5,
+      "lng": 27.8,
+      "description": "Starting point of the main storyline",
+      "guide": "story/chapter-1"
+    }
+  ],
+  "layers": ["collectibles", "bosses", "mounts", "quests", "teleports"],
+  "center": [28.0, 28.0],
+  "zoom": 4
+}

@@ -1,0 +1,69 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideCard from '../../../components/guide/GuideCard.astro';
+import { getTranslations, type Lang } from '../../../i18n/ui';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const langs: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
+  return langs.map((lang) => ({ params: { lang } }));
+};
+
+const { lang } = Astro.params as { lang: Lang };
+const t = getTranslations(lang);
+
+// Get news articles for this language
+const allGuides = await getCollection('guides');
+const newsArticles = allGuides
+  .filter((entry) => entry.id.startsWith(`${lang}/`) && entry.data.category === 'news')
+  .sort((a, b) => {
+    const dateA = a.data.publishDate?.getTime() || 0;
+    const dateB = b.data.publishDate?.getTime() || 0;
+    return dateB - dateA;
+  });
+---
+
+<BaseLayout title={t['nav.news']} description="Latest news and updates about Crimson Desert">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
+        {t['nav.news']}
+      </h1>
+      <p class="text-surface-600 dark:text-surface-400">
+        {t['section.latest']}
+      </p>
+    </div>
+
+    <!-- News Grid -->
+    {newsArticles.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {newsArticles.map((article) => {
+          const slug = article.id
+            .replace(new RegExp(`^${lang}/`), '')
+            .replace(/\.(md|mdx)$/, '');
+          return (
+            <GuideCard
+              title={article.data.title}
+              description={article.data.description}
+              category={article.data.category}
+              tags={article.data.tags}
+              difficulty={article.data.difficulty}
+              publishDate={article.data.publishDate}
+              coverImage={article.data.coverImage}
+              slug={slug}
+              lang={lang}
+            />
+          );
+        })}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-surface-500 dark:text-surface-400 text-lg">
+          No news available yet in this language.
+        </p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

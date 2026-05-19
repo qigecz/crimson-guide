@@ -13,69 +13,40 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { lang } = Astro.params as { lang: Lang };
 const t = getTranslations(lang);
 
-// Get all guides for this language
+// Get all guides (non-news) for this language
 const allGuides = await getCollection('guides');
 const langGuides = allGuides
-  .filter((entry) => entry.id.startsWith(`${lang}/`))
+  .filter((entry) => entry.id.startsWith(`${lang}/guides/`))
   .sort((a, b) => {
     const dateA = a.data.publishDate?.getTime() || 0;
     const dateB = b.data.publishDate?.getTime() || 0;
     return dateB - dateA;
   });
-
-const categories = [
-  'all',
-  'story',
-  'equipment',
-  'skills',
-  'exploration',
-  'mounts',
-  'bosses',
-  'beginners',
-  'news',
-] as const;
 ---
 
 <BaseLayout title={t['nav.guides']} description={t['hero.subtitle']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Page Header -->
     <div class="mb-8">
       <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
         {t['nav.guides']}
       </h1>
-      <p class="text-surface-600 dark:text-surface-400">
-        {t['hero.subtitle']}
-      </p>
+      <p class="text-surface-600 dark:text-surface-400">{t['hero.subtitle']}</p>
     </div>
 
-    <!-- Category Tabs -->
     <div class="flex flex-wrap gap-2 mb-8">
-      {categories.map((cat) => {
-        const isActive = cat === 'all';
-        const href = cat === 'all'
-          ? `/${lang}/guides`
-          : `/${lang}/guides/${cat}`;
-        return (
-          <a
-            href={href}
-            class:list={[
-              'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
-              isActive
-                ? 'bg-primary-600 text-white'
-                : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700',
-            ]}
-          >
-            {cat === 'all' ? t['hero.cta.guides'] : t[`category.${cat}`]}
-          </a>
-        );
-      })}
+      <a href={`/${lang}/guides`} class="px-4 py-2 text-sm font-medium rounded-lg bg-primary-600 text-white">
+        {t['hero.cta.guides']}
+      </a>
+      {['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners'].map((cat) => (
+        <a href={`/${lang}/guides/${cat}`} class="px-4 py-2 text-sm font-medium rounded-lg bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors">
+          {t[`category.${cat}`]}
+        </a>
+      ))}
     </div>
 
-    <!-- Guides Grid -->
     {langGuides.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {langGuides.map((guide) => {
-          // Extract slug from id (remove language prefix and extension)
           const slug = guide.id
             .replace(new RegExp(`^${lang}/guides/`), '')
             .replace(/\.(md|mdx)$/, '');
@@ -96,9 +67,7 @@ const categories = [
       </div>
     ) : (
       <div class="text-center py-16">
-        <p class="text-surface-500 dark:text-surface-400 text-lg">
-          No guides available yet in this language.
-        </p>
+        <p class="text-surface-500 dark:text-surface-400 text-lg">No guides available yet in this language.</p>
       </div>
     )}
   </div>
