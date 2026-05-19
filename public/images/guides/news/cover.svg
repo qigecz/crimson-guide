@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#1f2a48"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Newspaper layout -->
+  <rect x="150" y="40" width="500" height="350" rx="5" fill="#f5f0e8" opacity="0.95"/>
+  <rect x="150" y="40" width="500" height="40" rx="5" fill="#2c3e50"/>
+  <rect x="155" y="45" width="490" height="30" rx="3" fill="#2c3e50"/>
+  <text x="400" y="67" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#fff" letter-spacing="8">CRIMSON DESERT NEWS</text>
+  <!-- Headline area -->
+  <rect x="170" y="95" width="460" height="80" fill="#ddd"/>
+  <rect x="170" y="95" width="460" height="80" fill="#3a506b" opacity="0.8"/>
+  <text x="400" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#fff">RELEASE DATE</text>
+  <text x="400" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#ccc">CONFIRMED FOR 2026</text>
+  <!-- Article columns -->
+  <rect x="170" y="190" width="220" height="8" rx="2" fill="#999"/>
+  <rect x="170" y="205" width="200" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="216" width="210" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="227" width="180" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="238" width="195" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="256" width="220" height="8" rx="2" fill="#999"/>
+  <rect x="170" y="271" width="190" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="282" width="205" height="6" rx="2" fill="#bbb"/>
+  <rect x="170" y="293" width="175" height="6" rx="2" fill="#bbb"/>
+  <!-- Right column -->
+  <rect x="410" y="190" width="210" height="100" fill="#e8e0d4"/>
+  <rect x="410" y="190" width="210" height="15" fill="#c0392b" opacity="0.8"/>
+  <text x="515" y="202" text-anchor="middle" font-size="10" fill="#fff">LATEST UPDATE</text>
+  <rect x="420" y="215" width="190" height="6" rx="2" fill="#bbb"/>
+  <rect x="420" y="226" width="180" height="6" rx="2" fill="#bbb"/>
+  <rect x="420" y="237" width="185" height="6" rx="2" fill="#bbb"/>
+  <rect x="420" y="248" width="175" height="6" rx="2" fill="#bbb"/>
+  <!-- Bottom section -->
+  <rect x="410" y="300" width="210" height="8" rx="2" fill="#999"/>
+  <rect x="410" y="315" width="195" height="6" rx="2" fill="#bbb"/>
+  <rect x="410" y="326" width="200" height="6" rx="2" fill="#bbb"/>
+  <rect x="410" y="337" width="180" height="6" rx="2" fill="#bbb"/>
+  <rect x="410" y="348" width="190" height="6" rx="2" fill="#bbb"/>
+  <!-- Bottom bar -->
+  <rect x="150" y="390" width="500" height="4" fill="#c0392b" opacity="0.6"/>
+  <text x="400" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#556" letter-spacing="4">LATEST NEWS &amp; UPDATES</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a0a"/>
+      <stop offset="50%" style="stop-color:#2d0a0a"/>
+      <stop offset="100%" style="stop-color:#3a0505"/>
+    </linearGradient>
+    <radialGradient id="fire" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="40%" style="stop-color:#ff6b00"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Lava cracks -->
+  <path d="M0,400 Q100,380 200,410 Q300,390 400,405 Q500,385 600,415 Q700,390 800,400 L800,450 L0,450Z" fill="#2a0505"/>
+  <path d="M100,420 L120,410 L140,418 L160,405" stroke="#ff4500" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M400,425 L420,415 L440,422 L460,410" stroke="#ff4500" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M600,418 L620,408 L640,416" stroke="#ff4500" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Boss silhouette - large demonic figure -->
+  <g transform="translate(280, 50)">
+    <!-- Body -->
+    <path d="M120,280 L100,180 L90,120 L110,80 L140,60 L170,50 L200,60 L230,80 L250,120 L240,180 L220,280Z" fill="#1a0505" stroke="#3a0a0a" stroke-width="2"/>
+    <!-- Horns -->
+    <path d="M130,60 L110,10 L125,25 L140,55" fill="#2a1a10" stroke="#4a3020" stroke-width="1"/>
+    <path d="M210,60 L230,10 L215,25 L200,55" fill="#2a1a10" stroke="#4a3020" stroke-width="1"/>
+    <!-- Glowing eyes -->
+    <ellipse cx="160" cy="95" rx="12" ry="6" fill="#ff4500" opacity="0.9"/>
+    <ellipse cx="195" cy="95" rx="12" ry="6" fill="#ff4500" opacity="0.9"/>
+    <ellipse cx="160" cy="95" rx="6" ry="3" fill="#ffd700"/>
+    <ellipse cx="195" cy="95" rx="6" ry="3" fill="#ffd700"/>
+    <!-- Arms / Weapons -->
+    <path d="M100,180 L50,220 L30,200" fill="none" stroke="#2a1a10" stroke-width="8" stroke-linecap="round"/>
+    <path d="M240,180 L290,220 L310,200" fill="none" stroke="#2a1a10" stroke-width="8" stroke-linecap="round"/>
+    <!-- Chest glow -->
+    <ellipse cx="175" cy="150" rx="25" ry="30" fill="url(#fire)" opacity="0.3"/>
+  </g>
+  <!-- Energy aura -->
+  <ellipse cx="400" cy="200" rx="150" ry="180" fill="#ff4500" opacity="0.05"/>
+  <ellipse cx="400" cy="200" rx="100" ry="120" fill="#ff4500" opacity="0.08"/>
+  <!-- Sparks -->
+  <circle cx="300" cy="150" r="2" fill="#ffd700" opacity="0.8"/>
+  <circle cx="500" cy="130" r="1.5" fill="#ff6b00" opacity="0.7"/>
+  <circle cx="450" cy="100" r="2" fill="#ffd700" opacity="0.6"/>
+  <circle cx="350" cy="200" r="1" fill="#ff4500" opacity="0.9"/>
+  <circle cx="480" cy="180" r="1.5" fill="#ffd700" opacity="0.7"/>
+  <!-- Text -->
+  <text x="400" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#dc2626" letter-spacing="4">BOSS BATTLES</text>
+  <text x="400" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#a66" letter-spacing="6">STRATEGY &amp; TACTICS</text>
+</svg>

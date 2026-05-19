@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e"/>
+      <stop offset="50%" style="stop-color:#2d1b4e"/>
+      <stop offset="100%" style="stop-color:#4a1942"/>
+    </linearGradient>
+    <linearGradient id="sword" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="100%" style="stop-color:#b8860b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Desert dunes -->
+  <path d="M0 350 Q200 300 400 340 Q600 380 800 320 L800 450 L0 450Z" fill="#3d1a5e" opacity="0.6"/>
+  <path d="M0 380 Q200 340 400 370 Q600 400 800 350 L800 450 L0 450Z" fill="#4a2068" opacity="0.8"/>
+  <!-- Moon -->
+  <circle cx="650" cy="80" r="40" fill="#fffde7" opacity="0.9"/>
+  <circle cx="660" cy="75" r="35" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="50" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="250" cy="30" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="400" cy="70" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="550" cy="40" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="700" cy="55" r="2" fill="#fff" opacity="0.9"/>
+  <circle cx="150" cy="100" r="1" fill="#fff" opacity="0.4"/>
+  <circle cx="350" cy="120" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="500" cy="90" r="1" fill="#fff" opacity="0.5"/>
+  <!-- Sword in stone -->
+  <rect x="380" y="100" width="8" height="200" rx="2" fill="url(#sword)"/>
+  <rect x="355" y="185" width="58" height="12" rx="3" fill="#8B4513"/>
+  <rect x="362" y="197" width="44" height="6" rx="2" fill="#654321"/>
+  <polygon points="384,80 374,105 394,105" fill="#ffd700"/>
+  <!-- Blood drops -->
+  <circle cx="420" cy="160" r="4" fill="#dc2626" opacity="0.7"/>
+  <circle cx="430" cy="180" r="3" fill="#dc2626" opacity="0.5"/>
+  <circle cx="415" cy="175" r="2.5" fill="#dc2626" opacity="0.6"/>
+  <!-- Title text -->
+  <text x="400" y="410" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#ffd700" letter-spacing="4">CRIMSON DESERT</text>
+  <text x="400" y="438" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#ccc" letter-spacing="6">STORY WALKTHROUGH</text>
+</svg>

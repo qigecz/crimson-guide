@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5276"/>
+      <stop offset="40%" style="stop-color:#2e86c1"/>
+      <stop offset="70%" style="stop-color:#85c1e9"/>
+      <stop offset="100%" style="stop-color:#d4e6f1"/>
+    </linearGradient>
+    <linearGradient id="mtn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5d6d7e"/>
+      <stop offset="100%" style="stop-color:#2c3e50"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <!-- Sun -->
+  <circle cx="650" cy="80" r="45" fill="#f9e79f" opacity="0.9"/>
+  <circle cx="650" cy="80" r="60" fill="#f9e79f" opacity="0.15"/>
+  <!-- Far mountains -->
+  <polygon points="0,250 120,130 200,200 300,100 400,180 500,80 600,150 700,110 800,170 800,250" fill="#34495e" opacity="0.5"/>
+  <!-- Mid mountains -->
+  <polygon points="0,280 80,200 180,250 260,170 350,230 450,150 550,210 630,160 720,220 800,190 800,280" fill="url(#mtn)" opacity="0.7"/>
+  <!-- Forest line -->
+  <polygon points="0,300 50,270 100,295 150,265 200,290 250,260 300,285 350,255 400,280 450,258 500,282 550,260 600,285 650,262 700,288 750,265 800,290 800,320 0,320" fill="#1e8449" opacity="0.8"/>
+  <!-- Ground -->
+  <rect x="0" y="310" width="800" height="140" fill="#196f3d" opacity="0.6"/>
+  <!-- Map pin markers -->
+  <g>
+    <circle cx="120" cy="340" r="8" fill="#e74c3c"/>
+    <polygon points="120,348 114,360 126,360" fill="#e74c3c"/>
+    <circle cx="120" cy="338" r="3" fill="#fff"/>
+  </g>
+  <g>
+    <circle cx="350" cy="355" r="8" fill="#e74c3c"/>
+    <polygon points="350,363 344,375 356,375" fill="#e74c3c"/>
+    <circle cx="350" cy="353" r="3" fill="#fff"/>
+  </g>
+  <g>
+    <circle cx="580" cy="335" r="8" fill="#f39c12"/>
+    <polygon points="580,343 574,355 586,355" fill="#f39c12"/>
+    <circle cx="580" cy="333" r="3" fill="#fff"/>
+  </g>
+  <g>
+    <circle cx="700" cy="360" r="8" fill="#e74c3c"/>
+    <polygon points="700,368 694,380 706,380" fill="#e74c3c"/>
+    <circle cx="700" cy="358" r="3" fill="#fff"/>
+  </g>
+  <!-- Compass -->
+  <g transform="translate(700, 100)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#fff" stroke-width="2" opacity="0.6"/>
+    <polygon points="0,-20 -5,-5 0,-10 5,-5" fill="#e74c3c"/>
+    <polygon points="0,20 -5,5 0,10 5,5" fill="#fff" opacity="0.8"/>
+    <text x="0" y="-30" text-anchor="middle" font-size="10" fill="#fff" opacity="0.6">N</text>
+  </g>
+  <!-- Text -->
+  <text x="400" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#fff" letter-spacing="4">OPEN WORLD</text>
+  <text x="400" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#d4e6f1" letter-spacing="6">EXPLORATION GUIDE</text>
+</svg>
