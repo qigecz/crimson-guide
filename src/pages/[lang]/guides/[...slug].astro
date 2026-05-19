@@ -1,0 +1,132 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ReadingProgress from '../../../components/guide/ReadingProgress.tsx';
+import TableOfContents from '../../../components/guide/TableOfContents.tsx';
+import { getTranslations, type Lang } from '../../../i18n/ui';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const langs: Lang[] = ['en', 'zh-cn', 'ja', 'ko', 'es', 'pt'];
+  const guides = await getCollection('guides');
+
+  return guides.flatMap((entry) => {
+    // entry.id is like "en/guides/beginners/getting-started" or "en/guides/beginners/getting-started.mdx"
+    const match = entry.id.match(/^([a-z-]+)\/guides\/(.+?)(?:\.(md|mdx))?$/);
+    if (!match) return [];
+
+    const [, entryLang, slug] = match;
+    if (!langs.includes(entryLang as Lang)) return [];
+
+    return {
+      params: { lang: entryLang, slug },
+      props: { entry },
+    };
+  });
+};
+
+const { lang, slug } = Astro.params as { lang: Lang; slug: string };
+const { entry } = Astro.props;
+const t = getTranslations(lang);
+
+// Render the MDX content
+const { Content, headings } = await render(entry);
+
+const formattedDate = entry.data.publishDate.toLocaleDateString(
+  lang === 'zh-cn' ? 'zh-CN' : lang,
+  { year: 'numeric', month: 'long', day: 'numeric' }
+);
+
+const difficultyColors: Record<string, string> = {
+  beginner: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+  intermediate: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
+  advanced: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+};
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <ReadingProgress client:load />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <!-- Sidebar: TOC (desktop) -->
+      <aside class="hidden lg:block lg:col-span-3">
+        <div class="sticky top-24">
+          <TableOfContents client:load />
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <article class="lg:col-span-9">
+        <!-- Article Header -->
+        <header class="mb-8">
+          <!-- Category + Difficulty -->
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 text-sm font-medium rounded-lg bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400">
+              {t[`category.${entry.data.category}`]}
+            </span>
+            {entry.data.difficulty && (
+              <span class:list={['px-3 py-1 text-sm font-medium rounded-lg', difficultyColors[entry.data.difficulty] || '']}>
+                {entry.data.difficulty}
+              </span>
+            )}
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-surface-900 dark:text-surface-100 mb-4">
+            {entry.data.title}
+          </h1>
+
+          <p class="text-lg text-surface-600 dark:text-surface-400 mb-4">
+            {entry.data.description}
+          </p>
+
+          <div class="flex items-center gap-4 text-sm text-surface-500 dark:text-surface-500">
+            <span>By {entry.data.author}</span>
+            <span>•</span>
+            <time datetime={entry.data.publishDate.toISOString()}>{formattedDate}</time>
+          </div>
+
+          <!-- Tags -->
+          {entry.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-4">
+              {entry.data.tags.map((tag: string) => (
+                <span class="px-2 py-1 text-xs rounded-full bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <!-- Mobile TOC -->
+        <div class="lg:hidden mb-8 p-4 bg-surface-50 dark:bg-surface-900 rounded-lg border border-surface-200 dark:border-surface-800">
+          <TableOfContents client:load />
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose max-w-none">
+          <Content />
+        </div>
+
+        <!-- Related Guides -->
+        {entry.data.relatedGuides.length > 0 && (
+          <div class="mt-12 pt-8 border-t border-surface-200 dark:border-surface-800">
+            <h2 class="text-2xl font-bold text-surface-900 dark:text-surface-100 mb-4">
+              {t['guide.related']}
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {entry.data.relatedGuides.map((relatedSlug: string) => (
+                <a
+                  href={`/${lang}/guides/${relatedSlug}`}
+                  class="block p-4 rounded-lg border border-surface-200 dark:border-surface-800 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+                >
+                  <span class="text-sm text-primary-600 dark:text-primary-400">{relatedSlug}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </article>
+    </div>
+  </div>
+</BaseLayout>
