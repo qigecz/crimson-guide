@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+.superpowers/
+.astro/
+Pagefind/
+*.log
+.DS_Store
+Thumbs.db
