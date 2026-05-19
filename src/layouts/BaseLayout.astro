@@ -67,6 +67,15 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh-cn|ja|ko|es|pt)/, '');
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Google Analytics -->
+    <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-S7NFXKRW85" async></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S7NFXKRW85');
+    </script>
+
     <title>{title} | Crimson Guide</title>
 
     <!-- JSON-LD Structured Data -->
