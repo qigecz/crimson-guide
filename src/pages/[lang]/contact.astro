@@ -68,17 +68,14 @@ const t = getTranslations(lang);
         </div>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Contact Form (mailto) -->
       <div class="lg:col-span-3">
         <div class="bg-white dark:bg-surface-900 rounded-2xl border border-surface-200 dark:border-surface-800 p-6 md:p-8">
           <h2 class="text-xl font-bold text-surface-900 dark:text-surface-100 mb-6">
             {t['contact.form.title']}
           </h2>
 
-          <form id="contact-form" class="space-y-5" action="https://formspree.io/f/xwpkkqjp" method="POST">
-            <!-- Honeypot for spam prevention -->
-            <input type="text" name="_gotcha" class="hidden" />
-
+          <form id="contact-form" class="space-y-5">
             <div>
               <label for="name" class="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-1.5">
                 {t['contact.form.name']} *
@@ -143,10 +140,6 @@ const t = getTranslations(lang);
             >
               {t['contact.form.submit']}
             </button>
-
-            <div id="form-success" class="hidden p-4 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-sm font-medium">
-              {t['contact.form.success']}
-            </div>
           </form>
         </div>
       </div>
@@ -156,24 +149,24 @@ const t = getTranslations(lang);
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
-  const successMsg = document.getElementById('form-success');
 
-  form?.addEventListener('submit', async (e) => {
+  const subjectMap: Record<string, string> = {
+    ads: '[Ad Inquiry] Crimson Guide - Advertising',
+    partner: '[Partnership] Crimson Guide - Collaboration',
+    other: '[General] Crimson Guide - Contact',
+  };
+
+  form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData(form);
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-      if (res.ok) {
-        form.reset();
-        successMsg?.classList.remove('hidden');
-        setTimeout(() => successMsg?.classList.add('hidden'), 5000);
-      }
-    } catch {
-      // silently fail — user can use email directly
-    }
+
+    const name = (document.getElementById('name') as HTMLInputElement).value;
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const subject = (document.getElementById('subject') as HTMLSelectElement).value;
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const mailtoUrl = `mailto:tanglitian74@gmail.com?subject=${encodeURIComponent(subjectMap[subject] || subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
   });
 </script>
