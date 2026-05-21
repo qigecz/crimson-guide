@@ -13,6 +13,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { lang } = Astro.params as { lang: Lang };
 const t = getTranslations(lang);
 
+const allCategoryKeys = ['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners'] as const;
+
 // Get all guides (non-news) for this language
 const allGuides = await getCollection('guides');
 const langGuides = allGuides
@@ -25,20 +27,22 @@ const langGuides = allGuides
 ---
 
 <BaseLayout title={t['nav.guides']} description={t['hero.subtitle']}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="mb-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 page-enter">
+    <!-- Header -->
+    <div class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-surface-900 dark:text-surface-100 mb-3">
         {t['nav.guides']}
       </h1>
-      <p class="text-surface-600 dark:text-surface-400">{t['hero.subtitle']}</p>
+      <p class="text-lg text-surface-500 dark:text-surface-400">{t['hero.subtitle']}</p>
     </div>
 
-    <div class="flex flex-wrap gap-2 mb-8">
-      <a href={`/${lang}/guides`} class="px-4 py-2 text-sm font-medium rounded-lg bg-primary-600 text-white">
-        {t['hero.cta.guides']}
+    <!-- Category Filter -->
+    <div class="flex flex-wrap gap-2 mb-10">
+      <a href={`/${lang}/guides`} class="px-5 py-2.5 text-sm font-bold rounded-xl bg-primary-600 text-white shadow-md hover:bg-primary-700 transition-colors">
+        {lang === 'zh-cn' ? '全部' : 'All'}
       </a>
-      {['story', 'equipment', 'skills', 'exploration', 'mounts', 'bosses', 'beginners'].map((cat) => (
-        <a href={`/${lang}/guides/${cat}`} class="px-4 py-2 text-sm font-medium rounded-lg bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors">
+      {allCategoryKeys.map((cat) => (
+        <a href={`/${lang}/guides/${cat}`} class="px-5 py-2.5 text-sm font-medium rounded-xl bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200">
           {t[`category.${cat}`]}
         </a>
       ))}
@@ -66,8 +70,11 @@ const langGuides = allGuides
         })}
       </div>
     ) : (
-      <div class="text-center py-16">
-        <p class="text-surface-500 dark:text-surface-400 text-lg">No guides available yet in this language.</p>
+      <div class="text-center py-24">
+        <div class="w-16 h-16 mx-auto mb-4 text-surface-300 dark:text-surface-600">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+        </div>
+        <p class="text-surface-400 dark:text-surface-500 text-lg">No guides available yet in this language.</p>
       </div>
     )}
   </div>
