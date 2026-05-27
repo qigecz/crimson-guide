@@ -165,7 +165,7 @@
   }
 
   .prose th:first-child {
-    @apply rounded-tl-xl;
+    @apply rounded-tl-xl pl-6;
   }
 
   .prose th:last-child {
@@ -178,6 +178,10 @@
 
   .prose td {
     @apply px-4 py-3 border-b border-surface-100 text-surface-700;
+  }
+
+  .prose td:first-child {
+    @apply pl-6;
   }
 
   .prose tr:last-child td {
