@@ -50,7 +50,7 @@ const articleSchema = {
 <BaseLayout title={entry.data.title} description={entry.data.description} articleSchema={articleSchema}>
   <ReadingProgress client:load />
 
-  <div class="max-w-3xl mx-auto px-6 py-12">
+  <div class="max-w-5xl mx-auto px-6 py-12">
     <nav class="mb-8 text-xs text-surface-400" aria-label="Breadcrumb">
       <ol class="flex items-center gap-1.5 flex-wrap">
         <li><a href={`/${lang}`} class="hover:text-surface-600 dark:hover:text-surface-300 transition-colors">{t['nav.home']}</a></li>
