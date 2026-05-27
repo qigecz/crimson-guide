@@ -165,7 +165,7 @@
   }
 
   .prose th:first-child {
-    @apply rounded-tl-xl pl-6;
+    @apply rounded-tl-xl pl-8;
   }
 
   .prose th:last-child {
@@ -181,7 +181,7 @@
   }
 
   .prose td:first-child {
-    @apply pl-6;
+    @apply pl-8;
   }
 
   .prose tr:last-child td {
