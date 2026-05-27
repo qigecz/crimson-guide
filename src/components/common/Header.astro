@@ -13,36 +13,27 @@ const t = getTranslations(lang);
 const basePath = `/${lang}`;
 ---
 
-<header class="sticky top-0 z-50 glass border-b border-surface-200/60 dark:border-surface-800/60">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href={basePath} class="flex items-center gap-2.5 text-surface-900 dark:text-surface-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-        <span class="flex items-center justify-center w-9 h-9 rounded-lg bg-primary-600 text-white text-lg">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-          </svg>
-        </span>
-        <span class="text-xl font-extrabold tracking-tight">Crimson Guide</span>
+<header class="border-b border-surface-200 dark:border-surface-800">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="flex items-center justify-between h-14">
+      <a href={basePath} class="text-base font-semibold text-surface-900 dark:text-surface-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        Crimson Guide
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-1">
-        <a href={`${basePath}/guides`} class="nav-link text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-lg transition-colors">{t['nav.guides']}</a>
-        <a href={`${basePath}/map`} class="nav-link text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-lg transition-colors">{t['nav.map']}</a>
-        <a href={`${basePath}/news`} class="nav-link text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-lg transition-colors">{t['nav.news']}</a>
-        <a href={`${basePath}/about`} class="nav-link text-sm font-medium text-surface-600 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-lg transition-colors">{t['nav.about']}</a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href={`${basePath}/guides`} class="nav-link">{t['nav.guides']}</a>
+        <a href={`${basePath}/map`} class="nav-link">{t['nav.map']}</a>
+        <a href={`${basePath}/news`} class="nav-link">{t['nav.news']}</a>
+        <a href={`${basePath}/about`} class="nav-link">{t['nav.about']}</a>
       </nav>
 
-      <!-- Right Actions -->
-      <div class="flex items-center gap-2">
-        <!-- Search Button -->
+      <div class="flex items-center gap-1">
         <button
           id="search-btn"
-          class="p-2 rounded-lg text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors"
+          class="p-2 rounded-md text-surface-400 hover:text-surface-600 dark:hover:text-surface-300 transition-colors"
           aria-label="Search"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
@@ -53,22 +44,22 @@ const basePath = `/${lang}`;
   </div>
 
   <!-- Mobile Navigation -->
-  <div class="md:hidden border-t border-surface-200/60 dark:border-surface-800/60">
+  <div class="md:hidden border-t border-surface-200 dark:border-surface-800">
     <nav class="flex items-center justify-around py-2">
-      <a href={`${basePath}/guides`} class="flex flex-col items-center gap-1 text-xs text-surface-500 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-1">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+      <a href={`${basePath}/guides`} class="flex flex-col items-center gap-0.5 text-xs text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors py-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
         {t['nav.guides']}
       </a>
-      <a href={`${basePath}/map`} class="flex flex-col items-center gap-1 text-xs text-surface-500 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-1">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+      <a href={`${basePath}/map`} class="flex flex-col items-center gap-0.5 text-xs text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors py-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
         {t['nav.map']}
       </a>
-      <a href={`${basePath}/news`} class="flex flex-col items-center gap-1 text-xs text-surface-500 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-1">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+      <a href={`${basePath}/news`} class="flex flex-col items-center gap-0.5 text-xs text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors py-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
         {t['nav.news']}
       </a>
-      <a href={`${basePath}/about`} class="flex flex-col items-center gap-1 text-xs text-surface-500 dark:text-surface-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-1">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <a href={`${basePath}/about`} class="flex flex-col items-center gap-0.5 text-xs text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors py-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         {t['nav.about']}
       </a>
     </nav>

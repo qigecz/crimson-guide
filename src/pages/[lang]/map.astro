@@ -14,18 +14,14 @@ const t = getTranslations(lang);
 ---
 
 <BaseLayout title={t['nav.map']} description="Interactive map of the Crimson Desert world">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Page Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-2">
-        {t['nav.map']}
-      </h1>
-      <p class="text-surface-600 dark:text-surface-400">
-        Explore the world of Crimson Desert. Click markers to find guides and points of interest.
-      </p>
-    </div>
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-100 mb-2">
+      {t['nav.map']}
+    </h1>
+    <p class="text-sm text-surface-400 mb-8">
+      Explore the world of Crimson Desert. Click markers to find guides and points of interest.
+    </p>
 
-    <!-- Interactive Map -->
     <InteractiveMap client:load lang={lang} />
   </div>
 </BaseLayout>
